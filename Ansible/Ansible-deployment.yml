@@ -1,0 +1,14 @@
+- name: Deploy Frontend Application
+  hosts: nginx
+  tasks:
+    - name: Pull Docker Image
+      command: docker pull your-docker-registry/my-frontend-app:latest
+
+    - name: Stop Existing Container
+      command: docker stop my-frontend-container || true
+
+    - name: Remove Existing Container
+      command: docker rm my-frontend-container || true
+
+    - name: Run New Docker Container
+      command: docker run -d -p 80:80 --name my-frontend-container your-docker-registry/my-frontend-app:latest
